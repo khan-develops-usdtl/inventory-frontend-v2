@@ -1,0 +1,170 @@
+<mat-nav-list
+  class="toolbar-menu"
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayout.sm="column"
+  fxLayout.md="column"
+  fxLayoutAlign="start start"
+  style="padding-bottom: 0.4em"
+>
+  <a
+    *ngIf="authService.currentUser().group === 'inventory_admin'"
+    mat-button
+    [routerLink]="['/master']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >MASTER</a
+  >
+  <a
+    *ngIf="authService.currentUser().group === 'inventory_admin' || authService.currentUser().group === 'inventory_procurement'"
+    mat-button
+    [routerLink]="['/store-room']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >STORE ROOM</a
+  >
+
+  <a
+    *ngIf="
+      authService.currentUser().group === 'inventory_extractions' ||
+      authService.currentUser().group === 'inventory_admin'
+    "
+    mat-button
+    [routerLink]="['/extractions']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >EXTRACTIONS</a
+  >
+  <a
+    *ngIf="
+      authService.currentUser().group === 'inventory_mass-spec' ||
+      authService.currentUser().group === 'inventory_admin'
+    "
+    mat-button
+    [routerLink]="['/mass-spec']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >MASS SPEC</a
+  >
+  <a
+    *ngIf="
+      authService.currentUser().group === 'inventory_receiving' ||
+      authService.currentUser().group === 'inventory_admin'
+    "
+    mat-button
+    [routerLink]="['/receiving']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >RECEIVING</a
+  >
+  <a
+    *ngIf="
+      authService.currentUser().group === 'inventory_rd' ||
+      authService.currentUser().group === 'inventory_admin'
+    "
+    mat-button
+    [routerLink]="['/r&d']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >R&D</a
+  >
+  <a
+    *ngIf="
+      authService.currentUser().group === 'inventory_screening' ||
+      authService.currentUser().group === 'inventory_admin'
+    "
+    mat-button
+    [routerLink]="['/screening']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >SCREENING</a
+  >
+
+  <a
+    *ngIf="
+      authService.currentUser().group === 'inventory_shipping' ||
+      authService.currentUser().group === 'inventory_admin'
+    "
+    mat-button
+    [routerLink]="['/shipping']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >SHIPPING</a
+  >
+
+  <a
+    *ngIf="
+      authService.currentUser().group === 'inventory_quality' ||
+      authService.currentUser().group === 'inventory_admin'
+    "
+    mat-button
+    [routerLink]="['/quality']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >QUALITY</a
+  >
+  <a
+    *ngIf="authService.currentUser().group === 'inventory_admin'"
+    mat-button
+    aria-label="admin"
+    [routerLink]="['/admin-general-request']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >GENERAL REQUEST</a
+  >
+
+  <a
+    *ngIf="authService.currentUser().group === 'inventory_admin'"
+    mat-button
+    aria-label="admin"
+    [routerLink]="['/admin-office-supply-request']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >OFFICE SUPPLY REQUEST
+  </a>
+
+  <a
+    *ngIf="authService.currentUser().group === 'inventory_admin'"
+    mat-button
+    aria-label="admin"
+    [routerLink]="['/admin-store-room-request']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >STORE ROOM REQUEST</a
+  >
+
+  <a
+    mat-button
+    *ngIf="isInRequestsGroup()"
+    aria-label="departments"
+    [routerLink]="['/general-request']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >GENERAL REQUEST</a
+  >
+  <a
+    mat-button
+    *ngIf="isInRequestsGroup()"
+    aria-label="departments"
+    [routerLink]="['/store-room-request']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >STORE ROOM REQUEST</a
+  >
+  <a
+    mat-button
+    *ngIf="isInRequestsGroup()"
+    aria-label="departments"
+    [routerLink]="['/office-supply-request']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >OFFICE SUPPLY REQUEST
+  </a>
+  <a
+    mat-button
+    [routerLink]="['/chemicals']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >CHEMICALS</a
+  >
+</mat-nav-list>

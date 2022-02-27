@@ -1,0 +1,13 @@
+<div style="height: 100%" fxLayout="column">
+  <mat-toolbar color="accent" *ngIf="authService.isLoggedIn()">
+    {{ authService.currentUser().fullName }}
+  </mat-toolbar>
+
+  <div fxFlex></div>
+
+  <div fxFlex="8" fxFlexAlign="center">
+    <button mat-button color="primary" (click)="handleLogout()">
+      <mat-icon>logout</mat-icon> SIGN OUT
+    </button>
+  </div>
+</div>

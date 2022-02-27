@@ -1,0 +1,75 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    fxHide.xl
+    fxHide.lg
+    #menuDrawer
+    class="sidenav"
+    fixedInViewport
+    attr.role="navigation"
+    mode="over"
+  >
+    <mat-toolbar color="accent">Menu</mat-toolbar>
+    <inventory-top-menu
+      *ngIf="authService.isLoggedIn()"
+      (navigationEvent)="menuDrawer.toggle()"
+    ></inventory-top-menu>
+  </mat-sidenav>
+  <mat-sidenav
+    #profileDrawer
+    class="sidenav"
+    fixedInViewport
+    attr.role="navigation"
+    mode="over"
+    position="end"
+  >
+    <inventory-profile
+      (signoutEvent)="profileDrawer.toggle()"
+    ></inventory-profile>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="mat-elevation-z1">
+      <button
+        mat-icon-button
+        (click)="menuDrawer.toggle()"
+        fxHide.xl
+        fxHide.lg
+        *ngIf="authService.isLoggedIn()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+        <img
+        style="margin-right: 2em;"
+        fxHide.xs
+        fxHide.sm
+        fxHide.md
+          width="100"
+          src="../../../../assets//images/Logo-USDTL-Only_Large.png"
+          alt="usdtl logo"
+        />
+      <inventory-top-menu
+        *ngIf="authService.isLoggedIn()"
+        fxHide.xs
+        fxHide.sm
+        fxHide.md
+      ></inventory-top-menu>
+
+      <span class="spacer"></span>
+      <button
+        mat-icon-button
+        *ngIf="authService.isLoggedIn()"
+        class="account-circle-icon"
+        (click)="profileDrawer.toggle()"
+      >
+        <mat-icon style="width: 40px; font-size: 2.5em"
+          >account_circle</mat-icon
+        >
+      </button>
+    </mat-toolbar>
+    <mat-progress-bar
+      mode="query"
+      *ngIf="loading$ | async"
+      color="warn"
+    ></mat-progress-bar>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

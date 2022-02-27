@@ -1,0 +1,21 @@
+<inventory-bottom-toolbar (deleteEvent)="handleDelete($event)" [selected]="selected"></inventory-bottom-toolbar>
+<div class="container">
+  <ag-grid-angular
+  #agGrid
+  id="masterInventoryGrid"
+  style="width: 100%; height: 100%"
+  [headerHeight]="50"
+  [defaultColDef]="defaultColDef"
+  class="ag-theme-alpine"
+  [rowData]="rowData | async"
+  [columnDefs]="columnDefs"
+  rowSelection="multiple"
+  (gridReady)="onGridReady($event)"
+  [pagination]="true"
+  [animateRows]="true"
+  [paginationPageSize]="17"
+  (cellValueChanged)="handleUpdate($event)"
+  (selectionChanged)="getSelectedRows()"
+></ag-grid-angular>
+</div>
+

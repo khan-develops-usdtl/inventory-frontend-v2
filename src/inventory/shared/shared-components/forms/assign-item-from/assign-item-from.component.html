@@ -1,0 +1,51 @@
+<mat-card>
+    <form class="assign-form" [formGroup]="assignItemForm">
+      <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="32px">
+        <mat-list role="list">
+          <mat-list-item role="listitem" *ngFor="let masterItem of selected">
+            <span>{{ masterItem.id }}</span>
+            <span style="margin-right: 1em">.</span>
+            <span>{{ masterItem.item }}</span>
+          </mat-list-item>
+        </mat-list>
+  
+        <section style="border-left: 2px solid #d1d1d1; padding-left: 2.5em">
+          <h4><strong>Assign item to: </strong></h4>
+          <p>
+            <mat-checkbox [checked]="all" (change)="handleSelectAll($event)"
+              >All</mat-checkbox
+            >
+          </p>
+  
+          <p *ngFor="let department of departments">
+            <mat-checkbox
+              [value]="department.value"
+              [checked]="department.checked"
+              (change)="handleSelectChange($event)"
+              >{{ department.name }}</mat-checkbox
+            >
+          </p>
+        </section>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="1em" style="margin-top: 2em">
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="onClose()"
+          style="width: 100%"
+        >
+          CLOSE
+        </button>
+        <button
+          style="width: 100%; "
+          mat-stroked-button
+          color="primary"
+          type="submit"
+          (click)="onSubmit()"
+          [disabled]="assignItemForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+</mat-card>

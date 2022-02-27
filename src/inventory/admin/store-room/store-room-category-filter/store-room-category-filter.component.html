@@ -1,0 +1,7 @@
+<mat-form-field style="width: 150px">
+  <mat-select [(ngModel)]="selected" (ngModelChange)="valueChanged()">
+    <mat-option *ngFor="let category of categories" [value]="category">
+      {{ category | uppercase }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,46 @@
+<div class="flexContainer" fxLayout="column" fxLayoutAlign="center center" *ngIf="!authService.isLoggedIn() else elseBlock">
+  <div fxFlex="20">
+    <p
+      class="title"
+      [ngStyle.xs]="{ 'font-size.em': 1.5 }"
+      [ngStyle.sm]="{ 'font-size.em': 1.75 }"
+      [ngStyle.md]="{ 'font-size.em': 2 }"
+      [ngStyle.lg]="{ 'font-size.em': 2.75 }"
+      [ngStyle.xl]="{ 'font-size.em': 3.25 }"
+    >
+      WELCOME TO THE USDTL INVENTORY SYSTEM
+    </p>
+    <p
+      class="subtitle"
+      [ngStyle.xs]="{ 'font-size.em': 0.9 }"
+      [ngStyle.sm]="{ 'font-size.em': 1.125 }"
+      [ngStyle.md]="{ 'font-size.em': 1.25 }"
+      [ngStyle.lg]="{ 'font-size.em': 1.5 }"
+      [ngStyle.xl]="{ 'font-size.em': 1.75 }"
+    >
+      A PROGRAM DESIGNED TO TRACK AND PROCURE INVENTORY
+    </p>
+  </div>
+  <div fxFlex="40">
+    <app-signin-form></app-signin-form>
+  </div>
+  <div>
+    <p
+      class="copyright"
+      [style]="copyright"
+      [ngStyle.xs]="{ 'font-size.em': 0.7 }"
+      [ngStyle.sm]="{ 'font-size.em': 0.8 }"
+      [ngStyle.md]="{ 'font-size.em': 0.9 }"
+      [ngStyle.lg]="{ 'font-size.em': 1 }"
+      [ngStyle.xl]="{ 'font-size.em': 1 }"
+    >
+      Copyright © 2021 United States Drug Testing Laboratories Inc. All rights
+      reserved.
+    </p>
+  </div>
+</div>
+
+<ng-template #elseBlock>
+  <inventory-page-not-found></inventory-page-not-found>
+</ng-template>
+

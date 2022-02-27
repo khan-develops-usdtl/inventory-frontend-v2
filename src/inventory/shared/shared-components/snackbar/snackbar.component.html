@@ -1,0 +1,11 @@
+<div fxLayout="row">
+  <div>{{ data.message | uppercase }}</div>
+  <button
+    mat-icon-button
+    aria-label="snackbar action button"
+    (click)="snackBarRef.dismiss()"
+  >
+    <mat-icon>{{ data.type }}</mat-icon>
+  </button>
+</div>
+

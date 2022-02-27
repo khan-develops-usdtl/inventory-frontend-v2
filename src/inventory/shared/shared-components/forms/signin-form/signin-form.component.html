@@ -1,0 +1,69 @@
+<form
+  [formGroup]="signinForm"
+  fxLayout="column"
+  [style]="flexContainer"
+  fxFlexAlign="center center"
+>
+  <div
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxLayout.sm="column"
+    fxLayoutAlign="space-between start"
+    fxLayoutGap.xl="1em"
+    fxLayoutGap.lg="1em"
+    fxLayoutGap.md="1em"
+  >
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label><b>Username</b></mat-label>
+      <input
+        matInput
+        required
+        formControlName="username"
+        placeholder="your network username"
+      />
+      <mat-error *ngIf="signinForm.controls['username'].errors?.required"
+        >THIS FIELD IS REQUIRED</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label><b>Password</b></mat-label>
+      <input
+        matInput
+        required
+        formControlName="password"
+        [type]="hide ? 'password' : 'text'"
+        placeholder="your network password"
+      />
+      <mat-error *ngIf="signinForm.controls['password'].errors?.required"
+        >THIS FIELD IS REQUIRED</mat-error
+      >
+      <mat-icon matSuffix (click)="hide = !hide" style="cursor: pointer">{{
+        hide ? "visibility_off" : "visibility"
+      }}</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <button
+    mat-flat-button
+    color="primary"
+    [disabled]="signinForm.invalid"
+    type="submit"
+    (click)="onSubmit()"
+  >
+    Submit
+  </button>
+  <div class="errorMessage" *ngIf="error$ | async as error; else elseBlock">
+    <p>
+      {{ error }}
+    </p>
+
+  </div>
+</form>
+
+<ng-template #elseBlock 
+  ><p 
+  style="text-align: center; color: #1347a4; padding: 1em; font-size: medium;"
+  [ngStyle.xs]="{'font-size.px': 10 }"
+  [ngStyle.sm]="{'font-size.px': 14 }"
+  >Please use your network username and password to login</p>
+</ng-template>

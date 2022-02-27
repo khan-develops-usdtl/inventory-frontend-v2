@@ -1,0 +1,19 @@
+<span style="margin-right: 0">{{ cellValue }}</span>
+<span style="float: right">
+  <button
+    mat-icon-button
+    [matMenuTriggerFor]="menu"
+    *ngIf="authService.currentUser().group === 'inventory_admin' || authService.currentUser().group === 'inventory_mass_spec_admin'"
+  >
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button
+      mat-menu-item
+      *ngFor="let category of categories"
+      (click)="updateCategory(category)"
+    >
+      {{ category }}
+    </button>
+  </mat-menu>
+</span>

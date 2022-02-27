@@ -1,0 +1,190 @@
+<mat-card>
+  <form class="new-item-form" [formGroup]="newItemForm">
+    <div fxLayout="row" fxLayoutAlign="space-around center" fxLayoutGap="32px">
+      <div
+        style="
+          width: 100%;
+          border-right: 2px solid #d1d1d1;
+          padding-right: 2.5em;
+        "
+      >
+        <div fxLayout="row" fxLayoutGap="20px" style="width: 100%">
+          <mat-form-field class="text-form">
+            <mat-label>Item</mat-label>
+            <input matInput formControlName="item" required />
+            <mat-error *ngIf="newItemForm.controls['item'].errors?.required">{{
+              getErrorMessage()
+            }}</mat-error>
+          </mat-form-field>
+          <mat-form-field class="text-form">
+            <mat-label>Purcahse Unit</mat-label>
+            <input matInput formControlName="purchase_unit" required />
+            <mat-error
+              *ngIf="newItemForm.controls['purchase_unit'].errors?.required"
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px" style="width: 100%">
+          <mat-form-field class="text-form">
+            <mat-label>Recent CN</mat-label>
+            <input matInput formControlName="recent_cn" required />
+            <mat-error
+              *ngIf="newItemForm.controls['recent_cn'].errors?.required"
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="text-form">
+            <mat-label>Part Number</mat-label>
+            <input matInput formControlName="part_number" required />
+            <mat-error
+              *ngIf="newItemForm.controls['part_number'].errors?.required"
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px" style="width: 100%">
+          <mat-form-field class="text-form">
+            <mat-label>Recent Vendor</mat-label>
+            <input matInput formControlName="recent_vendor" required />
+            <mat-error
+              *ngIf="newItemForm.controls['recent_vendor'].errors?.required"
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="text-form">
+            <mat-label>Fisher CN</mat-label>
+            <input matInput formControlName="fisher_cn" required />
+            <mat-error
+              *ngIf="newItemForm.controls['fisher_cn'].errors?.required"
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px" style="width: 100%">
+          <mat-form-field class="text-form">
+            <mat-label>VWR CN</mat-label>
+            <input matInput formControlName="vwr_cn" required />
+            <mat-error
+              *ngIf="newItemForm.controls['vwr_cn'].errors?.required"
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+
+          <mat-form-field class="text-form">
+            <mat-label>Lab Source CN</mat-label>
+            <input matInput formControlName="lab_source_cn" required />
+            <mat-error
+              *ngIf="newItemForm.controls['lab_source_cn'].errors?.required"
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px" style="width: 100%">
+          <mat-form-field class="text-form">
+            <mat-label>Next Advance CN</mat-label>
+            <input matInput formControlName="next_advance_cn" required />
+            <mat-error
+              *ngIf="newItemForm.controls['next_advance_cn'].errors?.required"
+              >{{ getErrorMessage() }}</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="text-form">
+            <mat-label>Manufacturer</mat-label>
+            <input matInput formControlName="manufacturer" />
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px" style="width: 100%">
+          <mat-form-field class="text-form">
+            <mat-label>Average Unit Price</mat-label>
+            <input
+              matInput
+              formControlName="average_unit_price"
+              type="number"
+            />
+          </mat-form-field>
+
+          <mat-form-field class="text-from" style="width: 100%;">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" >
+              <mat-option *ngFor="let category of categories" [value]="category.value">
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutGap="20px" style="width: 100%">
+          <mat-form-field class="text-form">
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="type" />
+          </mat-form-field>
+          <mat-form-field class="text-form">
+            <mat-label>Group</mat-label>
+            <input matInput formControlName="group" />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="text-form" style="width: 100%;">
+          <mat-label>Comments</mat-label>
+          <textarea rows="3" matInput formControlName="comments"></textarea>
+        </mat-form-field>
+      </div>
+
+      <section fxFlexAling="end">
+        <h4><strong>Assign item to: </strong></h4>
+        <p>
+          <mat-checkbox
+            [checked]="all"
+            (change)="handleSelectAll($event)"
+            [disabled]="newItemForm.invalid"
+            >All</mat-checkbox
+          >
+        </p>
+
+        <p *ngFor="let department of departments">
+          <mat-checkbox
+            [formControlName]="department.value"
+            [disabled]="newItemForm.invalid"
+            >{{ department.name | titlecase }}</mat-checkbox
+          >
+        </p>
+      </section>
+    </div>
+    <div
+      fxLayout="row"
+      fxLayoutAlign="space-around center"
+      fxLayoutGap="1em"
+      style="margin-top: 2em"
+    >
+      <button
+        mat-stroked-button
+        color="warn"
+        (click)="onClose()"
+        style="width: 100%"
+      >
+        CLOSE
+      </button>
+      <button
+        mat-stroked-button
+        color="accent"
+        (click)="onClear()"
+        style="width: 100%"
+      >
+        CLEAR
+      </button>
+      <button
+        style="width: 100%; margin-top: 2em"
+        mat-stroked-button
+        color="primary"
+        type="submit"
+        (click)="onSubmit()"
+        [disabled]="newItemForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</mat-card>

@@ -1,0 +1,23 @@
+<mat-card fxLayout="column">
+  <div class="message" style="font-size: larger; font-weight: 600; padding: 0 0 2em 0;">
+    {{ data.message }}
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+    <button
+      mat-button
+      color="primary"
+      id="yes-button"
+      [mat-dialog-close]="true"
+    >
+      YES
+    </button>
+    <button
+      mat-button
+      color="warn"
+      id="no-button"
+      [mat-dialog-close]="false"
+    >
+      NO
+    </button>
+  </div>
+</mat-card>

@@ -1,0 +1,36 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div style="font-size: 1.25em; font-weight: 600; margin-bottom: 1.5em">
+    {{ rowItem.item }} <span style="margin: 0 1em">|</span> Recent CN:
+    {{ rowItem.recent_cn }}
+  </div>
+  <ag-grid-angular
+    #agGrid
+    id="extractionGrid"
+    style="width: 100%"
+    domLayout="autoHeight"
+    [headerHeight]="55"
+    [defaultColDef]="defaultColDef"
+    class="ag-theme-alpine"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    [animateRows]="true"
+    [singleClickEdit]="true"
+    (gridReady)="onGridReady($event)"
+    (cellValueChanged)="handleUpdate($event)"
+    [frameworkComponents]="frameworkComponents"
+    [context]="context"
+  ></ag-grid-angular>
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    style="width: 100%; margin-top: 1em"
+  >
+    <div>
+      TOTAL:
+      <span style="font-weight: 900; padding-left: 1em">{{
+        rowItem.quantity
+      }}</span>
+    </div>
+    <button mat-button (click)="onClose()">CLOSE</button>
+  </div>
+</div>

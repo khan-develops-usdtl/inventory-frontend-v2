@@ -1,0 +1,82 @@
+<mat-toolbar color="accent" class="mat-elevation-z1">
+  <inventory-search></inventory-search>
+
+  <span style="width: 2em"></span>
+  <div>
+    <button
+      mat-icon-button
+      matTooltip="ADD ITEM TO MASTER"
+      aria-lable="button to add new master item"
+      (click)="openDialog()"
+      *ngIf="addAssingIconsVisible"
+    >
+      <mat-icon style="font-size: 2.5em; width: 1em">add_box</mat-icon>
+    </button>
+
+    <span style="width: 0.5em"></span>
+
+    <button
+      mat-icon-button
+      matTooltip="ASSIGN ITEM TO DEPARTMENT"
+      aria-lable="button to add new master item"
+      [disabled]="isAssignToDisabled$ | async"
+      (click)="openAssignDialog()"
+      *ngIf="addAssingIconsVisible"
+    >
+      <mat-icon style="font-size: 2.5em; width: 1em">assignment_ind</mat-icon>
+    </button>
+  </div>
+
+  <button
+    mat-icon-button
+    color="warn"
+    (click)="handleDelete()"
+    [disabled]="isDeleteButtonDisabled$ | async"
+    *ngIf="isDeleteButtonVisible"
+  >
+    <mat-icon style="font-size: 2.7em; width: 1em">delete</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    (click)="download()"
+    matTooltip="DOWNLOAD REPORT"
+    *ngIf="isDownloadButtonVisible"
+  >
+    <mat-icon>file_download</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    (click)="send()"
+    matTooltip="SEND REPORT"
+    *ngIf="isSendButtonVisible"
+  >
+    <mat-icon>send</mat-icon>
+  </button>
+
+  <button
+    mat-icon-button
+    (click)="setIsExpanded()"
+    *ngIf="isExpandButtonVisible"
+  >
+    <mat-icon>{{ isExpanded ? "close_fullscreen" : "open_in_full" }}</mat-icon>
+  </button>
+
+  <span class="spacer"></span>
+
+  <button
+  mat-icon-button
+  (click)="downloadPDF()"
+  matTooltip="DOWNLOAD CHEMICALS LIST"
+  *ngIf="isPdfButtonVisible"
+>
+  <mat-icon>picture_as_pdf</mat-icon>
+</button>
+
+  <mat-chip-list aria-label="Fish selection" *ngIf="isGrandTotalVisible">
+    <mat-chip style="font-size: 1em; background-color: #fff;" color="accent" selected="true"
+      >{{ (grandTotal$ | async) | currency }}</mat-chip
+    >
+  </mat-chip-list>
+</mat-toolbar>

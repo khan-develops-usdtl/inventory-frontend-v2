@@ -1,0 +1,23 @@
+<inventory-bottom-toolbar (deleteEvent)="handleDelete($event)" [selected]="selected"  (downloadEvent)="download()"></inventory-bottom-toolbar>
+
+<div class="container">
+  <ag-grid-angular
+    #agGrid
+    id="extractionGrid"
+    style="width: 100%; height: 100%"
+    [headerHeight]="50"
+    [defaultColDef]="defaultColDef"
+    class="ag-theme-alpine"
+    [rowData]="rowData | async"
+    [columnDefs]="columnDefs"
+    [animateRows]="true"
+    [pagination]="true"
+    rowSelection="multiple"
+    [paginationPageSize]="15"
+    (gridReady)="onGridReady($event)"
+    (selectionChanged)="getSelectedRows()"
+    (cellValueChanged)="handleUpdate($event)"
+    groupDisplayType="custom"
+    groupDefaultExpanded="1"
+  ></ag-grid-angular>
+</div>

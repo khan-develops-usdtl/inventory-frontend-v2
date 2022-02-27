@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+  <span></span>
+  <span class="spacer"></span>
+  <button
+    mat-button
+    color="accent"
+    [disabled]="isDeleteButtonDisabled"
+    (click)="handleConfirmation()"
+  >
+    CONFIRM
+  </button>
+
+  <button
+    mat-icon-button
+    color="warn"
+    style="margin: 0 1.5em"
+    [disabled]="isDeleteButtonDisabled"
+    (click)="handleDelete()"
+  >
+    <mat-icon style="font-size: 2.7em">delete</mat-icon>
+  </button>
+</mat-toolbar>
+<div style="padding-top: 0.5em">
+  <ag-grid-angular
+    #agGrid
+    id="masterInventoryGrid"
+    [ngStyle.xs]="{ 'width.%': 100, 'height.px': 300 }"
+    [ngStyle.sm]="{ 'width.%': 100, 'height.px': 350 }"
+    [ngStyle.md]="{ 'width.%': 100, 'height.px': 400 }"
+    [ngStyle.lg]="{ 'width.%': 100, 'height.px': 500 }"
+    [ngStyle.xl]="{ 'width.%': 100, 'height.px': 700 }"
+    [headerHeight]="50"
+    [defaultColDef]="defaultColDef"
+    class="ag-theme-alpine"
+    [rowData]="rowData | async"
+    [columnDefs]="columnDefs"
+    rowSelection="multiple"
+    (selectionChanged)="getSelectedRows()"
+    (gridReady)="onGridReady($event)"
+    (cellValueChanged)="handleUpdate($event)"
+    [pagination]="true"
+    [animateRows]="true"
+    [paginationPageSize]="13"
+  ></ag-grid-angular>
+</div>

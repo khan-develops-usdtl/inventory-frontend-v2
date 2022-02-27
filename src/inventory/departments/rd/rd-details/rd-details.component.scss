@@ -1,0 +1,10 @@
+.container {
+  width: 100%;
+  height: calc(100% - 122px);
+}
+mat-toolbar {
+  height: 2.5em;
+}
+.spacer {
+  flex: 1 1 auto
+}

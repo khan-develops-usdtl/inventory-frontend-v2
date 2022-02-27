@@ -1,0 +1,62 @@
+<mat-card >
+    <form [formGroup]="requestForm" >
+      <div formArrayName="requests" style="max-height: 600px; overflow-y: auto;">
+        <div
+          *ngFor="let requestControl of getControls(); let i = index"
+          [formGroupName]="i"
+        >
+          <div>
+            <input
+            class="item-input"
+            type="text"
+            [size]="itemLength"
+            readonly
+            formControlName="item"
+            #itemInput
+          />
+  
+          <mat-form-field class="request-form" style="width: 100px">
+            <input
+              type="number"
+              min="1"
+              matInput
+              style="font-size: 1.5em"
+              formControlName="quantity"
+            />
+            <span matSuffix>Qty</span>
+          </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field class="text-form" style="width: 100%">
+              <mat-label>Custom Text</mat-label>
+              <textarea rows="3" matInput formControlName="custom_text"></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div
+        fxLayout="row"
+        fxLayoutAlign="space-around center"
+        fxLayoutGap="1em"
+        style="margin-top: 3em"
+      >
+        <button
+          mat-stroked-button
+          color="warn"
+          (click)="onClose()"
+          style="width: 100%"
+        >
+          Cancel
+        </button>
+        <button
+          mat-stroked-button
+          color="primary"
+          style="width: 100%"
+          (click)="onSubmit()"
+          [disabled]="requestForm.invalid"
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+</mat-card>
