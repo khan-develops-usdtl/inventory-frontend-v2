@@ -29,5 +29,5 @@ export interface IMaster {
   quality: IDepartment[];
   shipping: IDepartment[];
   safety: IDepartment[];
-  chemicals: IChemical[];
+  chemicals: IChemical;
 }

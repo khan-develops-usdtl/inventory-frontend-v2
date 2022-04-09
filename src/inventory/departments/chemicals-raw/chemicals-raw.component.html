@@ -1,4 +1,8 @@
-<inventory-bottom-toolbar (deleteEvent)="handleDelete($event)" [selected]="selected"  (downloadEvent)="download()"></inventory-bottom-toolbar>
+<inventory-bottom-toolbar
+  (deleteEvent)="handleDelete($event)"
+  [selected]="selected"
+  (downloadEvent)="download()"
+></inventory-bottom-toolbar>
 
 <div class="container">
   <ag-grid-angular
@@ -13,7 +17,7 @@
     [animateRows]="true"
     [pagination]="true"
     rowSelection="multiple"
-    [paginationPageSize]="17"
+    [paginationPageSize]="15"
     (gridReady)="onGridReady($event)"
     (selectionChanged)="getSelectedRows()"
     (cellValueChanged)="handleUpdate($event)"

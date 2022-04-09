@@ -91,6 +91,15 @@ export class BottomToolbarComponent implements OnInit {
       this._store.dispatch(clearSearch())
     } else if (this._router.url === '/chemicals') {
       this.addAssingIconsVisible = false
+      this.isDeleteButtonVisible = false
+      this.isExpandButtonVisible = true
+      this.isGrandTotalVisible = false
+      this.isSendButtonVisible = false
+      this.isDownloadButtonVisible = true
+      this.isPdfButtonVisible = false
+      this._store.dispatch(clearSearch())
+    } else if (this._router.url === '/chemicals-raw') {
+      this.addAssingIconsVisible = false
       this.isDeleteButtonVisible = true
       this.isExpandButtonVisible = true
       this.isGrandTotalVisible = false
@@ -307,6 +316,7 @@ export class BottomToolbarComponent implements OnInit {
   }
 
   handleDelete() {
+    console.log('testing')
     this.deleteEvent.emit(true)
   }
 
@@ -344,6 +354,8 @@ export class BottomToolbarComponent implements OnInit {
     } else if (this._router.url === '/office-supply-request') {
       this.downloadEvent.emit(true)
     } else if (this._router.url ==='/chemicals') {
+      this.downloadEvent.emit(true)
+    } else if (this._router.url ==='/chemicals-raw') {
       this.downloadEvent.emit(true)
     }
     

@@ -136,6 +136,7 @@ import { RdExpirationRendererComponent } from './departments/rd/rd-expiration-re
 import { RdReceivedRendererComponent } from './departments/rd/rd-received-renderer/rd-received-renderer.component';
 import { ScreeningExpirationRendererComponent } from './departments/screening/screening-expiration-renderer/screening-expiration-renderer.component';
 import { ScreeningReceivedRendererComponent } from './departments/screening/screening-received-renderer/screening-received-renderer.component';
+import { ChemicalsRawComponent } from './departments/chemicals-raw/chemicals-raw.component';
 
 @NgModule({
   declarations: [
@@ -244,6 +245,7 @@ import { ScreeningReceivedRendererComponent } from './departments/screening/scre
     RdReceivedRendererComponent,
     ScreeningExpirationRendererComponent,
     ScreeningReceivedRendererComponent,
+    ChemicalsRawComponent,
     
   ],
   imports: [

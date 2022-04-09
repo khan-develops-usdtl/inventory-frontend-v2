@@ -1,22 +1,19 @@
 import { Store } from '@ngrx/store';
 import { AgGridAngular } from 'ag-grid-angular';
 import { IInventory } from 'src/inventory/inventory.state';
-import { ChemicalsService } from './chemicals.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IDepartment } from '../departments-models/departments.model';
 import { SnackbarService } from 'src/inventory/shared/shared-components/snackbar/snackbar.service';
 import { BottomToolbarService } from 'src/inventory/shared/shared-components/navbar/bottom-toolbar/bottom-toolbar.service';
-import { ChemicalsCategoryRendererComponent } from './chemicals-category-renderer/chemicals-category-renderer.component';
-import { ChemicalsQuantityRendererComponent } from './chemicals-quantity-renderer/chemicals-quantity-renderer.component';
+import { ChemicalsService } from '../chemicals/chemicals.service';
 import { map } from 'rxjs/operators';
 
-
 @Component({
-  selector: 'inventory-chemicals',
-  templateUrl: './chemicals.component.html',
-  styleUrls: ['./chemicals.component.scss']
+  selector: 'inventory-chemicals-raw',
+  templateUrl: './chemicals-raw.component.html',
+  styleUrls: ['./chemicals-raw.component.scss']
 })
-export class ChemicalsComponent implements OnInit {
+export class ChemicalsRawComponent implements OnInit {
   @ViewChild('agGrid', { static: false }) agGrid: AgGridAngular | undefined;
   selected: IDepartment[]
   rowData: any
@@ -33,10 +30,7 @@ export class ChemicalsComponent implements OnInit {
     private _chemicalsService: ChemicalsService,
     private _bottomToolbarService: BottomToolbarService,
   ) {
-    this.frameworkComponents = {
-      quantityRenderer: ChemicalsQuantityRendererComponent,
-      categoryRenderer: ChemicalsCategoryRendererComponent,
-    }
+    this.frameworkComponents = { }
     this.context = { chemicalsComponent: this }
   }
 
@@ -48,7 +42,7 @@ export class ChemicalsComponent implements OnInit {
 
   getMasterChiemicalItems() {
     this.rowData = this._chemicalsService.getMasterChemicalItems().pipe(map(items => {
-      return items.filter(masterItem => masterItem.chemicals).sort((a,b) => a.chemicals.id - b.chemicals.id)
+      return items.sort((a,b) => a.id - b.id)
     }))
   }
 
@@ -105,7 +99,7 @@ export class ChemicalsComponent implements OnInit {
         cas: $event.data.cas === '' || $event.data.cas === undefined ? null : $event.data.cas,
         physical_state: $event.data.physical_state === '' || $event.data.physical_state === undefined ? null : $event.data.physical_state,
         container_size: $event.data.container_size === '' || $event.data.container_size === undefined ? null : $event.data.container_size,
-        health_hz: $event.data.health_hz === '' || $event.data.container_size === undefined ? null : $event.data.container_size,
+        health_hz: $event.data.health_hz === '' || $event.data.health_hz === undefined ? null : $event.data.health_hz,
         fire_hz: $event.data.fire_hz === '' || $event.data.fire_hz === undefined ? null : $event.data.fire_hz,
         specific_hz: $event.data.specific_hz === '' || $event.data.specific_hz === undefined ? null : $event.data.specific_hz,
         special_notes: $event.data.special_notes === '' || $event.data.special_notes === undefined ? null : $event.data.special_notes,
@@ -113,12 +107,13 @@ export class ChemicalsComponent implements OnInit {
       }
       this._chemicalsService.updateChemicalItem($event.data.chemicals.id, data).subscribe({
         next: data => {
-          if($event.newValue !== $event.oldValue) {
             this.getMasterChiemicalItems()
-          } 
         },
         error: () => {
-          this._snackbarService.openSnackbar('Item could not be updated', 'ERROR')
+          if($event.newValue !== '' && $event.newValue !== undefined && $event.newValue !== null) {
+            this._snackbarService.openSnackbar('Item could not be updated', 'ERROR')
+          }
+
         }
       })
     }
@@ -140,6 +135,7 @@ export class ChemicalsComponent implements OnInit {
       {
         headerName: 'ID',
         field: 'chemical_id',
+        checkboxSelection: true,
       },
       {
         headerName: 'Item',
@@ -154,62 +150,44 @@ export class ChemicalsComponent implements OnInit {
         field: 'purchase_unit',
       },
       {
-        headerName: 'Location',
-        field: 'location'
-      },
-      {
-        headerName: 'Quantity',
-        field: 'quantity',
-      },
-      {
         headerName: 'CAS#',
         field: 'cas',
+        editable: true
       },
       {
         headerName: 'Physical State',
         field: 'physical_state',
+        editable: true
       },
       {
         headerName: 'Container Size',
         field: 'container_size',
+        editable: true
       },
       {
         headerName: 'Health Hazard',
         field: 'health_hz',
-        headerClass: function(params: any) {
-          return 'health_hz'
-        },
-        cellStyle:  function() {
-          return { 'background-color': '#1852ffa6', 'font-weight': 'bold', 'text-align': 'center' }
-        }
+        editable: true
       },
       {
         headerName: 'Fire Hazard',
         field: 'fire_hz',
-        headerClass: function(params: any) {
-          return 'fire_hz'
-        },
-        cellStyle:  function() {
-          return { 'background-color': '#ff2e2eb7', 'font-weight': 'bold', 'text-align': 'center' }
-        }
+        editable: true
       },
       {
         headerName: 'Reactivity Hazard',
         field: 'reactivity_hz',
-        headerClass: function(params: any) {
-          return 'reactivity_hz'
-        },
-        cellStyle:  function() {
-          return { 'background-color': '#ffff00c9', 'font-weight': 'bold', 'text-align': 'center' }
-        }
+        editable: true
       },
       {
         headerName: 'Specific hazard',
         field: 'specific_hz',
+        editable: true
       },
       {
         headerName: 'Special notes',
         field: 'special_notes',
+        editable: true
       }
     ]
   }
@@ -219,7 +197,9 @@ export class ChemicalsComponent implements OnInit {
       resizable: true,
       sortable: true,
       enableCellChangeFlash: true,
+      floatingFilter: true,
     }
   }
 }
+
 

@@ -167,4 +167,12 @@
     (click)="handleNavigation()"
     >CHEMICALS</a
   >
+  <a
+    mat-button
+    *ngIf="authService.currentUser().group === 'inventory_admin'"
+    [routerLink]="['/chemicals-raw']"
+    routerLinkActive="active"
+    (click)="handleNavigation()"
+    >RAW CHEMICALS</a
+  >
 </mat-nav-list>

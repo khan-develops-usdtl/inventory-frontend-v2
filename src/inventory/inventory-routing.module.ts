@@ -24,6 +24,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { ChemicalsComponent } from './departments/chemicals/chemicals.component';
 import { BreakroomRequestComponent } from './departments/requests/breakroom-request/breakroom-request.component';
 import { AdminBreakroomRequestComponent } from './admin/requests/admin-breakroom-request/admin-breakroom-request.component';
+import { ChemicalsRawComponent } from './departments/chemicals-raw/chemicals-raw.component';
 
 const routes: Routes = [
   {
@@ -54,6 +55,7 @@ const routes: Routes = [
   { path: 'screening', component: ScreeningComponent, canActivate: [AuthGuard]  },
   { path: 'quality', component: QualityComponent, canActivate: [AuthGuard]  },
   { path: 'chemicals', component: ChemicalsComponent, canActivate: [AuthGuard]  },
+  { path: 'chemicals-raw', component: ChemicalsRawComponent, canActivate: [AuthGuard]  },
   { path: '**', redirectTo: '/auth'},
 ];
 
